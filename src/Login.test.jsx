@@ -1,5 +1,5 @@
 import { cleanup, render, screen } from '@testing-library/react'
-import { afterEach, describe, it } from 'vitest'
+import userEvent from '@testing-library/user-event'
 
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
@@ -18,6 +18,29 @@ describe('<LoginForm />', () => {
     screen.getByRole('button', { name: /Login/i })
   })
 
-    screen.getByText('Login')
+  it('should submit a form and invoke a handleLogin', async () => {
+    const user = userEvent.setup()
+
+    const mockHandleLogin = vi.fn()
+
+    const mockUser = { email: 'test@tmail.com', password: '123456' }
+
+    render(<LoginForm handleLogin={mockHandleLogin} />)
+
+    const usernameInput = screen.getByPlaceholderText('Email')
+    const passwordInput = screen.getByPlaceholderText('Password')
+    const buttonSubmit = screen.getByRole('button', { name: /Login/i })
+
+    await user.type(usernameInput, mockUser.email)
+    await user.type(passwordInput, mockUser.password)
+
+    await user.click(buttonSubmit)
+
+    expect(mockHandleLogin).toHaveBeenCalledTimes(1)
+
+    expect(mockHandleLogin).toHaveBeenCalledWith({
+      email: mockUser.email,
+      password: mockUser.password
+    })
   })
 })
