@@ -1,19 +1,22 @@
 import { cleanup, render, screen } from '@testing-library/react'
 import { afterEach, describe, it } from 'vitest'
 
-const Login = () => {
-  return <h1>Login</h1>
-}
+import { afterEach, describe, expect, it, vi } from 'vitest'
 
-describe('<Login />', () => {
+import LoginForm from './LoginForm'
+
+describe('<LoginForm />', () => {
   afterEach(cleanup)
 
   it('should render', () => {
-    render(<Login />)
+    render(<LoginForm />)
   })
 
   it('should render title correctly', () => {
-    render(<Login />)
+    render(<LoginForm />)
+
+    screen.getByRole('button', { name: /Login/i })
+  })
 
     screen.getByText('Login')
   })

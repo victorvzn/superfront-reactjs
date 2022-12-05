@@ -1,7 +1,11 @@
+import LoginForm from './LoginForm'
+
 function App () {
+  const handleLogin = (data) => { console.log(data) }
+
   return (
     <div>
-      <h1>Vite + React</h1>
+      <LoginForm handleLogin={handleLogin} />
     </div>
   )
 }
