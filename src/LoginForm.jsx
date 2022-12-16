@@ -4,6 +4,7 @@ const LoginForm = ({ handleLogin }) => {
   const DEFAULT_FORM = { email: '', password: '' }
 
   const [form, setForm] = useState(DEFAULT_FORM)
+  const [error, setError] = useState('')
 
   const handleChange = (event) => {
     const { name, value } = event.target
@@ -14,6 +15,16 @@ const LoginForm = ({ handleLogin }) => {
   const handleSubmit = (event) => {
     event.preventDefault()
 
+    if (!form?.email) {
+      setError('Username is required')
+      return
+    }
+
+    if (!form?.password) {
+      setError('Password is required')
+      return
+    }
+
     handleLogin(form)
   }
 
@@ -22,6 +33,8 @@ const LoginForm = ({ handleLogin }) => {
       <h1>Login</h1>
 
       <form onSubmit={handleSubmit}>
+
+        {error ? <div role='alert'>{error}</div> : ''}
 
         <input
           type='text'
