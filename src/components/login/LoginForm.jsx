@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
-const LoginForm = ({ handleLogin }) => {
-  const DEFAULT_FORM = { email: '', password: '' }
+const LoginForm = ({ children, handleLogin }) => {
+  const DEFAULT_FORM = { username: '', password: '' }
 
   const [form, setForm] = useState(DEFAULT_FORM)
   const [error, setError] = useState('')
@@ -15,7 +15,7 @@ const LoginForm = ({ handleLogin }) => {
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    if (!form?.email) {
+    if (!form?.username) {
       setError('Username is required')
       return
     }
@@ -33,14 +33,15 @@ const LoginForm = ({ handleLogin }) => {
       <h1>Login</h1>
 
       <form onSubmit={handleSubmit}>
+        {children}
 
         {error ? <div role='alert'>{error}</div> : ''}
 
         <input
           type='text'
-          name='email'
-          placeholder='Email'
-          value={form.email}
+          name='username'
+          placeholder='Username'
+          value={form.username}
           onChange={handleChange}
         />
 

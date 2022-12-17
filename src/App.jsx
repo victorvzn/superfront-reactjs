@@ -1,12 +1,12 @@
-import LoginForm from './LoginForm'
+import Router from './router'
+
+import { UserProvider } from './context/AuthContext'
 
 function App () {
-  const handleLogin = (data) => { console.log(data) }
-
   return (
-    <div>
-      <LoginForm handleLogin={handleLogin} />
-    </div>
+    <UserProvider>
+      <Router />
+    </UserProvider>
   )
 }
 

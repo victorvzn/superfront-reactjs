@@ -23,15 +23,15 @@ describe('<LoginForm />', () => {
   it('should submit a form with the username and password and invoke a handleLogin', async () => {
     const mockHandleLogin = vi.fn()
 
-    const mockUser = { email: 'test@tmail.com', password: '123456' }
+    const mockUser = { username: 'test@tmail.com', password: '123456' }
 
     render(<LoginForm handleLogin={mockHandleLogin} />)
 
-    const usernameInput = screen.getByPlaceholderText('Email')
+    const usernameInput = screen.getByPlaceholderText('Username')
     const passwordInput = screen.getByPlaceholderText('Password')
     const buttonSubmit = screen.getByRole('button', { name: /Login/i })
 
-    await userEvent.type(usernameInput, mockUser.email)
+    await userEvent.type(usernameInput, mockUser.username)
     await userEvent.type(passwordInput, mockUser.password)
 
     await userEvent.click(buttonSubmit)
@@ -64,14 +64,14 @@ describe('<LoginForm />', () => {
   it('should show an error message when submit is clicked and no password is provided', async () => {
     const mockHandleLogin = vi.fn()
 
-    const mockUser = { email: 'test@tmail.com' }
+    const mockUser = { username: 'test@tmail.com' }
 
     render(<LoginForm handleLogin={mockHandleLogin} />)
 
-    const usernameInput = screen.getByPlaceholderText('Email')
+    const usernameInput = screen.getByPlaceholderText('Username')
     const buttonSubmit = screen.getByRole('button', { name: /Login/i })
 
-    await userEvent.type(usernameInput, mockUser.email)
+    await userEvent.type(usernameInput, mockUser.username)
     await userEvent.click(buttonSubmit)
 
     const errorMessage = screen.getByRole('alert')
