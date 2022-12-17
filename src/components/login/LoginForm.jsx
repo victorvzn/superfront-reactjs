@@ -20,10 +20,10 @@ const LoginForm = ({ children, handleLogin }) => {
       return
     }
 
-    if (!form?.password) {
-      setError('Password is required')
-      return
-    }
+    // if (!form?.password) {
+    //   setError('Password is required')
+    //   return
+    // }
 
     handleLogin(form)
   }
@@ -45,13 +45,13 @@ const LoginForm = ({ children, handleLogin }) => {
           onChange={handleChange}
         />
 
-        <input
+        {/* <input
           type='password'
           name='password'
           placeholder='Password'
           value={form.password}
           onChange={handleChange}
-        />
+        /> */}
 
         <button>Login</button>
       </form>

@@ -20,19 +20,22 @@ export const UserProvider = ({ children }) => {
 
     const response = await verify({ username })
 
-    if (response?.existsUser) {
-      setErrorMessage('Sign In: Lo sentimos intenta nuevamente')
+    const existUser = !!response.length
+
+    if (!existUser) {
+      setErrorMessage('Lo sentimos intenta nuevamente')
       setIsLoading(false)
       return false
     }
 
-    if (response.existUser) {
-      storeUser(response.user)
+    if (existUser) {
+      const userResponse = response.length > 0 ? response[0] : null
+      storeUser(userResponse)
     }
 
     setIsLoading(false)
 
-    return response.existUser
+    return existUser
   }
 
   const signUp = async ({ username }) => {
@@ -41,13 +44,17 @@ export const UserProvider = ({ children }) => {
 
     const response = await verify({ username })
 
-    if (response.existsUser) {
-      setErrorMessage('Sign Up: Lo sentimos intenta nuevamente')
+    const existUser = !!response.length
+
+    if (existUser) {
+      setErrorMessage('Lo sentimos intenta nuevamente')
       setIsLoading(false)
       return false
     }
 
-    await signUpUser({ username })
+    if (!existUser) {
+      await signUpUser({ username })
+    }
 
     setIsLoading(false)
 

@@ -14,10 +14,7 @@ export const verify = async ({ username }) => {
 
     const data = await response.json()
 
-    return {
-      existUser: !!data.length,
-      user: data.length > 0 ? data[0] : null
-    }
+    return data
   } catch (error) {
     console.log(error)
   }
