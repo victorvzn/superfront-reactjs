@@ -1,4 +1,4 @@
-import { cleanup, render, screen, prettyDOM } from '@testing-library/react'
+import { cleanup, render, screen } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import userEvent from '@testing-library/user-event'
 
@@ -68,7 +68,7 @@ describe('<LoginForm />', () => {
 
     render(<LoginForm handleLogin={mockHandleLogin} />)
 
-    const usernameInput = screen.getByPlaceholderText('Password')
+    const usernameInput = screen.getByPlaceholderText('Email')
     const buttonSubmit = screen.getByRole('button', { name: /Login/i })
 
     await userEvent.type(usernameInput, mockUser.email)
